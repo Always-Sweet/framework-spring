@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dicDao" class="com.demo.ioc.DicDao" />
+    <!-- IOC控制反转 -->
+    <bean id="dicService" class="com.demo.ioc.DicService">
+        <!-- DI依赖注入 -->
+        <property name="dicDao" ref="dicDao" />
+        <constructor-arg name="name" value="myName" />
+    </bean>
+
+</beans>

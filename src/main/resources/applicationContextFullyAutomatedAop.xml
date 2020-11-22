@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 目标类 -->
+    <bean id="dicService" class="com.demo.aop.DicServiceImpl"></bean>
+    <!-- 切面类 -->
+    <bean id="myAspect" class="com.demo.aop.MyAspectImpl"></bean>
+    <!-- AOP
+        1.导入命名空间
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        2.使用<aop:config>进行配置
+        proxy-target-class="true"声明代表使用cglib代理
+        <aop:pointcut> 切入点
+        <aop:advisor> 切面
+        3.切入点表达式
+        execution(* com.demo.*.*(..)))
+        返回任意值 包名 任意类 任意方法 任意参数
+    -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="pointcut" expression="execution(* com.demo.aop.*.*(..)))" />
+        <aop:advisor advice-ref="myAspect" pointcut-ref="pointcut" />
+    </aop:config>
+
+</beans>
